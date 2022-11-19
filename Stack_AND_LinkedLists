@@ -1,0 +1,103 @@
+//IMPLEMENTING STACK USING LINKED LISTS
+
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+
+//PART1 STACK -LINKEDLIST
+
+   class Node{
+	public:
+		string name;
+		int age;
+		double height;
+	
+		Node *next;
+		
+		Node(string name,int age,double height){
+			this->name=name;
+			this->age=age;
+			this->height=height;
+			
+			next=NULL;
+		}
+};
+
+class StackLinkedList{
+private:
+	
+Node *top;
+public:
+	StackLinkedList(){
+		top=NULL;
+	}
+	void push(string name,int age,double height){
+		Node *n=new Node(name,age,height);//n is top of the stack
+		if(top==NULL){
+			top=n;
+		}
+		else{
+			n->next=top;
+			top=n;
+		}
+	}
+	
+	int pop(){
+
+   if(top==NULL)
+   cout<<"Stack Underflow"<<endl;
+   else {
+      cout<<"\nThe popped link is "<<"{" <<top->name<<","<<top->age<<","<<top->height<<"}" <<endl;
+      top = top->next;
+   }
+	}
+	
+	//destructor, we dynamically created pointers
+	~StackLinkedList(){
+		Node *next;
+		while(top!=NULL){
+			next=top->next;
+			delete top;
+			top=next;
+		}
+	}
+	
+	void peek(){
+
+struct Node* ptr;
+   if(top==NULL)
+   cout<<"stack is empty";
+   else {
+      ptr = top;
+      cout<<"Stack link has: ";
+      while (ptr != NULL) {
+         cout<<"{"<< ptr->name<<"," <<ptr->age<<"," <<ptr->height<<"}-->";
+         ptr = ptr->next;
+      }
+   }
+   cout<<"NULL\n\n";
+	}
+};
+int main(int argc, char** argv) {
+	//PART1 STACK -LINKEDLIST
+
+	     StackLinkedList list1;
+	list1.push("Zoe",30,1.3);
+	list1.push("Joe",48,1.4);
+	list1.push("Sue",27,1.2);
+	list1.push("Fred",34,1.7);
+	list1.peek();
+	
+	list1.pop();
+	list1.pop();
+	
+	 list1.push("Tom", 44, 1.1);
+	 list1.pop();
+	 list1.push("Mark", 34, 1.4);
+	 list1.push("Anne", 24, 1.0);
+	 cout<<"\n\n\n";
+	 	list1.peek();
+
+	return 0;
+}

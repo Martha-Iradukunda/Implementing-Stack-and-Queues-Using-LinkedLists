@@ -1,0 +1,151 @@
+# Implementing-Stack-and-Queues-Using-LinkedLists
+implementing stack and queues using linkedLists- C++   https://github.com/Martha-Iradukunda
+
+
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+using namespace std;
+	//PART2= QUEUE AND LINKED LIST
+	class Node{
+	public:
+	string name;
+		int age;
+		double height;
+	
+		Node *next;
+		
+		Node(string name,int age,double height){
+			this->name=name;
+			this->age=age;
+			this->height=height;
+			
+			next=NULL;
+		}
+			};
+			
+			class queueLinkedListImplementation{
+				private:
+					Node *front;
+					Node *rear;
+					public:
+						queueLinkedListImplementation(){
+							front=rear=NULL;
+						}
+						
+						
+				void enqueue(string name,int age,double height){
+					Node *n=new  Node(name,age,height);
+					if(rear==NULL){
+						rear=front=n;
+					}
+					else{
+						rear->next=n;
+						rear=n;
+					}
+				}	
+				
+				void Dequeue() { // delete values from front side
+        Node *temp;
+        if(front == NULL)
+            cout<<"Queue is Empty\n";
+        else
+        {
+            temp= front;
+                  cout<<"\nThe dequeued link is "<<"{" <<temp->name<<","<<temp->age<<","<<temp->height<<"}" <<endl;
+
+            front = front->next;
+            //delete temp;
+        }
+ 
+    }
+
+	~queueLinkedListImplementation(){
+		Node *next;
+		while(front!=NULL){
+			next=front->next;
+			delete front;
+			front=next;
+		}
+	}
+	
+	void display()
+    {
+        Node *temp;
+        temp= front;
+        while(temp!=NULL) 
+        {
+         cout<<"{"<< temp->name<<"," <<temp->age<<"," <<temp->height<<"}-->";
+            temp = temp->next;
+        }
+        cout<<"NULL\n";
+    }
+    
+    void AVERAGE(){
+    	 Node *temp;
+        temp= front;
+        double average,sum=0;
+        while(temp!=NULL) 
+        {
+         double h=temp->height;
+            temp = temp->next;
+            sum=sum+h;
+            
+            average=sum/4;
+        }
+        cout<<"The average heights of final link is: "<<average<<"\n";
+	}
+	
+	void Above30_Age(){
+		
+		 Node *temp;
+        temp= front;
+        cout<<"\nThe athletes above 30 years are: ";
+        while(temp!=NULL) 
+        {
+        	if(temp->age>30){
+        	cout<<"{"<< temp->name<<"," <<temp->age<<"," <<temp->height<<"}-->";
+
+			}
+            temp = temp->next;
+        }
+        cout<<"NULL\n";
+	}
+	
+	
+	
+			};
+int main(int argc, char** argv) {
+	
+	//PART2= QUEUE AND LINKED LIST
+	
+	queueLinkedListImplementation list1;
+	list1.enqueue("Zoe",30,1.3);
+	list1.enqueue("Joe",48,1.4);
+	list1.enqueue("Sue",27,1.2);
+	list1.enqueue("Fred",34,1.7);
+	list1.display();
+	
+	cout<<"\ndequeue 2 links\n";
+	list1.Dequeue();
+	list1.Dequeue();
+    	cout<<"\nenqueue 1 link\n";
+	list1.enqueue("Tom", 44, 1.1);
+		list1.display();
+
+cout<<"\ndequeue 1 link\n";
+list1.Dequeue();
+	cout<<"\nenqueue 2 links\n";
+list1.enqueue("Mark", 34, 1.4);
+list1.enqueue("Anne", 24, 1.0); 
+
+	cout<<"\n\nThe final link:  ";
+	list1.display();
+	
+	
+		list1.AVERAGE();
+		
+		list1.Above30_Age();
+	return 0;
+}
